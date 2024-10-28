@@ -1,2 +1,2 @@
 # SigmonAIClassifier
-A American Sign Language classifier.
+An American Sign Language classifier.
