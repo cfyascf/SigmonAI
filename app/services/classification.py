@@ -1,6 +1,7 @@
 from app.data.enums import ModelType
 from app.services.ai_model import AiModel
 from app.services.ml_model import MlModel
+from app.errors.app import AppError
 
 class ClassificationService:
     __ai_model : AiModel
@@ -15,13 +16,17 @@ class ClassificationService:
         classifier = ClassificationService()
         classification = None
 
-        print(type(classifier))
-        print(type(classifier.__ai_model))
-        print(type(classifier.__ml_model))
+        model_type = data['model_type']
+        media = data['file']
 
-        if(data.model_type is ModelType.NEURAL_NETWORK):
-            classification = classifier.__ai_model.predict(data.media)
-        else:
-            classification = classifier.__ml_model.predict(data.media)
+        match model_type:
+            case ModelType.NEURAL_NETWORK:
+                classification = classifier.__ai_model.predict(media)
+
+            case ModelType.MACHINE_LEARNING:
+                classification = classifier.__ml_model.predict(media)
+
+            case _:
+                raise AppError(403, "Not a valid model type.")
 
         return classification

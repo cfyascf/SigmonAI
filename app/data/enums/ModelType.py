@@ -1,3 +1,3 @@
 class ModelType:
-    NEURAL_NETWORK = "neural_network"
-    MACHINE_LEARNING = "machine_learning"
+    NEURAL_NETWORK = "neural-network"
+    MACHINE_LEARNING = "machine-learning"

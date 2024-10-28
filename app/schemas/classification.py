@@ -18,6 +18,8 @@ class ClassificationSchema(Schema):
         if file.filename == '':
             raise AppError(403, "Media file is mandatory.")
         
+        # ..checks if the file exists and 
+        # integrates it to the form..
         form_data['file'] = file
         data = schema.load(form_data)
 
