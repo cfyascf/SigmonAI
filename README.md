@@ -1,2 +1,2 @@
 # SigmonAIClassifier
-A API to consume SigmonAi.
+A American Sign Language classifier.
