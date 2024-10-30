@@ -3,13 +3,14 @@ import joblib
 import numpy as np
 from PIL import Image
 
-class NNSingleDBModel:
+from app.services.base_model import BaseModel
+
+class NNSingleDBModel(BaseModel):
     __instance = None
-    __path = r'C:\Users\disrct\Desktop\yasmim\SigmonAI\app\services\models\nn_singledb.sav'
-    __categories = r'C:\Users\disrct\Desktop\yasmim\SigmonAI\app\services\models\categories.txt'
 
     def __init__(self):
-        self.__model = joblib.load(self.__path)
+        super().__init__()
+        self.__model = joblib.load(self.get_path())
 
     @staticmethod
     def get_instance():
@@ -18,12 +19,6 @@ class NNSingleDBModel:
             NNSingleDBModel.__instance = nn
 
         return NNSingleDBModel.__instance
-    
-    def get_categories(self):
-        with open(self.__categories, 'r') as file:
-            alphabet_list = [line.strip() for line in file]
-
-        return alphabet_list
     
     def process_image(self, image):
         image_stream = io.BytesIO(image.read())
