@@ -1,15 +1,15 @@
 from app.data.enums import ModelType
 from app.services.nn_singledb_model import NNSingleDBModel
-from app.services.ml_model import MlModel
+from app.services.random_forest_ml_model import RandomForestMLModel
 from app.errors.app import AppError
 
 class ClassificationService:
     __ai_model : NNSingleDBModel
-    __ml_model : MlModel
+    __ml_model : RandomForestMLModel
 
     def __init__(self):
         self.__ai_model = NNSingleDBModel.get_instance()
-        self.__ml_model = MlModel.get_instance()
+        self.__ml_model = RandomForestMLModel.get_instance()
 
     @staticmethod
     def classify(data):
