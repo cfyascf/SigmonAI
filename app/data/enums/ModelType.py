@@ -1,3 +1,5 @@
 class ModelType:
-    NEURAL_NETWORK = "neural-network"
-    MACHINE_LEARNING = "machine-learning"
+    SINGLE_DB_NN = "single_db_nn"
+    SVM = "svm"
+    RANDOM_FOREST = "random_forest"
+    ANDRE_NN = "andre_nn"

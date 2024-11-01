@@ -1,4 +1,5 @@
 import io
+import os
 import joblib
 import numpy as np
 from PIL import Image
@@ -6,11 +7,13 @@ from PIL import Image
 from app.services.base_model import BaseModel
 
 class NNSingleDBModel(BaseModel):
+    __path = fr'{os.path.dirname(os.path.abspath(__file__))}\models\nn_singledb.sav'
+    __categories = fr'{os.path.dirname(os.path.abspath(__file__))}\models\categories.txt'
     __instance = None
 
     def __init__(self):
         super().__init__()
-        self.__model = joblib.load(self.get_path())
+        self.__model = joblib.load(self.__path)
 
     @staticmethod
     def get_instance():
@@ -26,6 +29,12 @@ class NNSingleDBModel(BaseModel):
         img_array = np.asarray(img_opened)
 
         return np.expand_dims(img_array, axis=0)
+
+    def get_categories(self):
+        with open(self.__categories, 'r') as file:
+            alphabet_list = [line.strip() for line in file]
+
+        return alphabet_list
     
     def predict(self, image):
         expanded_img = self.process_image(image)
